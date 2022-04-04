@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @font-face {
+            font-family: 'icomoon';
+            src:  url('fonts/icomoon.eot?wii0mh');
+            src:  url('fonts/icomoon.eot?wii0mh#iefix') format('embedded-opentype'),
+                url('fonts/icomoon.ttf?wii0mh') format('truetype'),
+                url('fonts/icomoon.woff?wii0mh') format('woff'),
+                url('fonts/icomoon.svg?wii0mh#icomoon') format('svg');
+            font-weight: normal;
+            font-style: normal;
+            font-display: block;
+}
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        transition: all .3s;
+    }
+    body {
+        background-color: rgba(0,0,0,.8);
+    }
+.note{
+    position:absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    height:60%;
+	width: 30%;
+    max-height:100%;
+	overflow-y:auto;
+    border: 1px solid #ccc;
+    background-color: rgba(255,255,255,.8);
+	
+}
+.top {
+    position:absolute;
+    top: 7%;
+    left: 35%;
+    height: 67px;
+    width: 30%;
+    border: #ccc 1px solid;
+    border-bottom: 0;
+    transform-style: preserve-3d;
+        perspective: 500px;
+}
+.bottom {
+    position:absolute;
+    bottom: 17%;
+    left: 35%;
+    height: 61px;
+    width: 30%;
+    border: #ccc 1px solid;
+    border-top: 0px;
+    transform-style: preserve-3d;
+    perspective: 500px;
+    overflow: hidden;
+    
+}
+ul li {
+    position: relative;
+    height: 60px;
+    width: 100%;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 53px;
+    border-bottom: 1px solid gray;
+    color: white;
+    transition: all .3s;
+    transform-style: preserve-3d;
+    perspective: 500px;
+}
+.ul {
+    position: relative;
+    transform-style: preserve-3d;
+    perspective: 500px;
+}
+.oneLine {
+    white-space: nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
+}
+ul li .title {
+    font-size: 24px;
+    font-weight: 400;
+}
+ul li:hover {
+    background-color: skyblue;
+    color: white;
+    box-shadow: 2px 2px 2px 2px rgba(0,0,0,.1);
+    transform: translateX(2px);
+}
+input {
+    display: block;
+    padding-left: 10px;
+    height: 30px;
+    width: 371px;
+    color: white;
+    border: none;
+    border-bottom: black 1px solid;
+    outline: none;
+    background-color: rgba(0,0,0,0);
+}
+input::placeholder {
+    color: rgba(255,255,255,.4);
+}
+.bottom button {
+    height: 40px;
+    width: 40px;
+    background-color: rgba(0,0,0,0);
+    border-style: none;
+}
+.bottom button:hover {
+    cursor: pointer;
+    transform: translateZ(10px);
+}
+.bottom button {
+    position: absolute;
+    right: 10px;
+    top: 15px;
+    transition: all .3s;
+}
+.bottom button::after {
+    font-family: 'icomoon';
+    content: '';
+    font-size:  30px;
+    color: greenyellow;
+}
+ul li .delete {
+    position: absolute;
+    right: 5px;
+    top: 16px;
+    text-decoration: none;
+    background-color: rgba(0,0,0,0);
+    border: 0;
+    transition: all .3s;
+}
+ul li .delete:hover {
+    cursor: pointer;
+    transform: translateZ(10px);
+}
+ul li .delete::after{
+    font-family: 'icomoon';
+    content: '';
+    font-size:  30px;
+    color: greenyellow;
+}
+ul li .repair {
+    position: absolute;
+    right: 45px;
+    top: 16px;
+    text-decoration: none;
+    background-color: rgba(0,0,0,0);
+    border: 0;
+    transition: all .3s;
+}
+ul li .repair:hover {
+    cursor: pointer;
+    transform: translateZ(10px);
+}
+ul li .repair::after{
+    font-family: 'icomoon';
+    content: '';
+    font-size:  30px;
+    color: greenyellow;
+}
+.searchBtn {
+    position: absolute;
+    right: 5px;
+    top: 10px;
+    border: 0;
+    background-color: rgba(0,0,0,0);
+}
+.searchBtn:hover {
+    cursor: pointer;
+    transform: translateZ(10px);
+}
+.searchBtn::after {
+    font-family: 'icomoon';
+    content: '';
+    font-size: 46px;
+    color: skyblue;
+}
+.cancelBtn {
+    position: absolute;
+    right: 20px;
+    top: 25px;
+    border: 0;
+    background-color: rgba(0,0,0,0);
+}
+.cancelBtn:hover {
+    cursor: pointer;
+}
+.cancelBtn::after {
+    font-family: 'icomoon';
+    content: '';
+    font-size: 26px;
+    color: black;
+}
+.top input {
+    margin-bottom: 3px;
+}
+.hide {
+    display: none;
+}
+.bg img {
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+
+}
+.bg6 img{
+    position: absolute;
+    z-index: -1;
+    right: 150px;
+    width: 180px;
+}
+.bg7 img{
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    right: 150px;
+    width: 180px;
+}
+    </style>
+</head>
+<body>
+    <div class="top">
+        <div class="bg6"><img src="bg6.png" alt=""></div>
+        <input type="text" class="searchTitle" placeholder="按标题搜索">
+        <input type="text" class="searchContent" placeholder="按内容搜索">
+        <button class="searchBtn" id="searchOrCancelBtn"></button>
+    </div>  
+    <div class="note">
+        <div class="bg"><img src="bg3.png" alt=""></div>
+        <ul></ul>     
+    </div>  
+    <div class="bottom">
+        <div class="bg7"><img src="bg7.png" alt=""></div>
+        <input type="text" class="title" placeholder="请输入标题">
+        <input type="text" class="content" placeholder="请输入内容">
+        <button class="add"></button>
+    </div>   
+
+
+    <script>
+        // alert('欢迎来看的小记~');
+        var ul= document.querySelector('ul');
+        var add=document.querySelector('.add');
+        var searchOrCancelBtn =document.querySelector('#searchOrCancelBtn');
+        var title =document.querySelector('.title');
+        var content =document.querySelector('.content');
+        var list='';
+        var newli='<li id="%d"><h4 class="title oneLine">{%title%}</h4><p class="content oneLine">{%content%}</p><button class="repair"></button><button class="delete"></button></li>'
+        var fillUl=function(){
+            if(list.length==0){
+                ul.innerHTML='<li>没有内容</li>';
+                return;
+            }
+            var str='';
+            for(var i=list.length-1;i>-1;i--){
+                str+=newli.replace('{%title%}',list[i].title).replace('{%content%}',list[i].content).replace('%d',list[i].id);
+            }
+            ul.innerHTML=str;        
+           //更新list后也要更新删除和修改函数里面的数据    
+            deleteOne();
+            repairOne();
+            look();
+        }
+        var flag=0;//判断搜索与取消搜索
+        searchOrCancelBtn.addEventListener('click',function(){
+            var lisTitle =document.querySelectorAll('h4');
+            var lisContent=document.querySelectorAll('p');
+            var searchTitle=document.querySelector('.searchTitle');
+            var searchContent=document.querySelector('.searchContent');
+            if(flag==0){
+                if(searchContent.value==''&&searchTitle.value!=''){
+                    var flag2=0;
+                    for(var i=0;i<lisTitle.length;i++){
+                        if(lisTitle[i].innerText!=searchTitle.value){
+                            lisTitle[i].parentNode.className='hide';
+                        }
+                        else{
+                            lisTitle[i].parentNode.style.backgroundColor='skyblue';
+                            flag2=1;
+                        }
+                    }
+                    if(!flag2){
+                        alert('未找到含有该标题的事件');
+                    }
+                    flag=1;
+                    //变图片
+                searchOrCancelBtn.className='cancelBtn';
+                }
+                else if(searchContent.value!=''&&searchTitle.value==''){
+                    var flag1=0;
+                    for(var i=0;i<lisContent.length;i++){
+                        if(lisContent[i].innerText!==searchContent.value){
+                            lisContent[i].parentNode.className='hide';
+                        }
+                        else{
+                            lisContent[i].parentNode.style.backgroundColor='skyblue';
+                            flag1=1;
+                        }
+                    }
+                    if(!flag1){
+                        alert('未找到含有该内容的事件');
+                    }
+                    flag=1;
+                    searchOrCancelBtn.className='cancelBtn';
+                }
+                else if(searchContent.value==''&&searchTitle.value==''){
+                    alert('请输入搜索内容！');
+                }
+                else if(searchContent.value!=''&&searchTitle.value!=''){
+                    var flag3=0;
+                    for(var i=0;i<lisContent.length;i++){
+                        for(var k=0;k<lisTitle.length;k++){
+                            if(lisContent[i].innerText!=searchContent.value||lisTitle[i].innerText!=searchTitle.value){
+                                lisContent[i].parentNode.className='hide';
+                            }
+                            else{
+                            lisTitle[i].parentNode.style.backgroundColor='skyblue';
+                            flag3=1;
+                        }
+                        } 
+                    }
+                    if(!flag3){
+                        alert('未找到该事件');
+                    }
+                    flag=1;
+                    searchOrCancelBtn.className='cancelBtn';
+                }
+            }
+            else {
+                for(var i=0;i<lisTitle.length;i++){                      
+                    lisTitle[i].parentNode.className='';
+                    lisTitle[i].parentNode.style.backgroundColor='';
+                      flag=0;  
+                      //变图片
+                      searchOrCancelBtn.className='searchBtn';
+                      searchTitle.value='';
+                      searchContent.value='';
+                }  
+            }    
+        })
+        var deleteOne=function(){
+            var deleteNote = document.querySelectorAll('.delete');
+            for(var i=0;i<deleteNote.length;i++){
+                deleteNote[i].addEventListener('click',function(){
+                    var ul= document.querySelector('ul');
+                    ul.removeChild(this.parentNode);
+                    deleteList(this.parentNode.id);
+                    saveList();
+                })
+            }
+ 
+        }
+        var look=function(){
+            var lis=document.querySelectorAll('li');
+            for(var i=0;i<lis.length;i++){
+                lis[i].addEventListener('click',function(){
+                    this.style.height='200px';
+                    this.children[0].className='title';
+                    this.children[1].className='content';
+                })
+                lis[i].onmouseout=function(){
+                    this.style.height='60px';
+                    this.children[0].className='title oneLine';
+                    this.children[1].className='content oneLine';
+                }
+            }
+        }
+        var repairOne=function(){//写完记得像delete一样加到前面fill去
+            var repairNote=document.querySelectorAll('.repair');
+            for(var i=0;i<repairNote.length;i++){
+                repairNote[i].addEventListener('click',function(){
+                    var judge=prompt('您确定要修改该事件的内容吗？(请输入是或否)');
+                    if(judge=='是'){
+                        var witch =prompt('请选择要修改的对象（标题或者内容）');
+                        if(witch=='标题'){
+                            var newTitle= prompt('修改后的标题是:');    
+                            this.parentNode.children[0].innerText=newTitle;                  
+                            repairListByTitle(this.parentNode.id,newTitle);
+                            saveList();
+                            alert('修改完成!');
+                        }
+                        else if(witch=='内容'){
+                            var newContent= prompt('修改后的内容是:');    
+                            this.parentNode.children[1].innerText=newContent;                  
+                            repairListByContent(this.parentNode.id,newContent);
+                            saveList();
+                            alert('修改完成!');
+                        }
+                        else {
+                            alert('你不能修改这个哦~');
+                        }
+                    }
+                })
+            }
+        }
+        var repairListByTitle = function(int,str){
+            for(var i=0;i<list.length;i++){
+                if(list[i].id==int){
+                    list[i].title=str;
+                }
+            }
+        }
+        var repairListByContent = function(int,str){
+            for(var i=0;i<list.length;i++){
+                if(list[i].id==int){
+                    list[i].content=str;
+                }
+            }
+        }
+        add.addEventListener('click',function(){
+            if(title.value==''||content.value==''){
+                alert('存在未输入的内容!');
+                return;
+            }
+            var obj= {
+                title: title.value,
+                content: content.value,
+                id : list.length
+            }
+            list.push(obj);
+            fillUl();
+            saveList();
+            title.value='';
+            content.value='';
+        })
+        var saveList = function(){
+            localStorage.setItem('listData',JSON.stringify(list));
+        }
+        var getList = function(){
+            var localList = localStorage.getItem('listData');
+            localList = JSON.parse(localList);
+            return localList;
+        }
+        var deleteList = function(int){
+            for(var i=0;i<list.length;i++){
+                if(list[i].id==int){
+                    for(var temp =i+1;temp<list.length;temp++){
+                        list[temp].id--;
+                    }
+                    list.splice(i,1);
+                }
+            }
+        }
+        var main=function(){
+            if(localStorage.getItem('listData')){
+                list = getList();
+            }else{
+                list=[];
+            }
+            fillUl();
+        }
+        main();
+    </script>
+</body>
+</html>
