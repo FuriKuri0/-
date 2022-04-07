@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jQuery.min.js"></script>
+    <link rel="stylesheet" href="base.css">
+    <style>
+        .box {
+            position: absolute;
+            left: 50%;
+            top: 173px;
+            transform: translateX(-50%);
+            height: 334px;
+            width: 359px;
+            background-color: rgba(255,255,255,.5);
+        }
+        .top {
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            /* background-color: green; */
+        }
+         a {
+            float: left;
+            position: relative;
+            width: 50%;
+            height: 100%;
+            line-height: 60px;
+            font-size: 20px;
+            text-align: center;
+            color: black;
+            text-decoration: none;
+            /* background-color: blue; */
+        }
+        
+        .top a:hover {
+            color: skyblue;
+            cursor: pointer;
+        }
+        .top a:nth-child(1)::after {
+            position: absolute;
+           content: '|';
+            right: 0px;
+            color: rgba(0,0,0,.8);
+        }
+        input {
+            display: block;
+            width: 80%;
+            height: 50px;
+            margin-top: 30px;
+            padding-left: 20px;
+            border-bottom: 1px solid rgba(0,0,0,.1);
+            background-color: rgba(0,0,0,0);
+        }
+        .inputSign {          
+            border-bottom: 1px solid rgba(255,255,255,.8);
+        }
+        .loginBtn,
+        .signBtn {
+            display: block;
+            height: 45px;
+            width: 80%;
+            margin-top: 35px;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            background: -webkit-linear-gradient(top left,blue,skyblue);
+            transition: all .3s;
+        }
+        button:hover {
+            transform: translateZ();
+            box-shadow: 0px 2px 4px rgba(0,0,0,.3);
+        }
+        .rem {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            left: 42px;
+            bottom: 87px;
+       
+        }
+        .he {
+            position: absolute;
+            width: 180px;
+            height: 20px;
+            left: 65px;
+            bottom: 85px;
+            font-size: 14px;
+            
+        }
+        .eye {
+            position: absolute;
+            /* width: 42px;
+            left: 268px; */
+            bottom: 124px;
+            width: 28px;
+             left: 279px;
+        }
+        .eye:hover {
+            cursor: pointer;
+        }
+        .bg1 {
+            width: 1920px;
+        }
+    </style>
+</head>
+<body>
+    <img src="1.webp" alt="" class="bg1">
+    <div id="box" class="box">
+        <div class="top clearfix">
+            <a class="login" id="0" href="javascript:;">登录</a>
+            <a class="sign" id="1" href="javascript:;">注册</a>
+        </div>
+        <ul>
+            <li class="">
+                <form >
+                    <input type="text" placeholder="请输入账号或者用户名">
+                    <input type="password" placeholder="请输入密码">
+                </form>
+                <input type="checkbox" class="rem"><div class="he">记住密码</div>               
+                <button class="loginBtn">登录</button>
+                <img src="eye1.png" alt="" class="eye">
+            </li>
+            <li class="hide">
+                <form >
+                    <input type="text" placeholder="请输入账号或者用户名">
+                    <input type="password" placeholder="请输入密码">
+                    <input type="password" placeholder="请确认密码">
+                </form>
+                <button class="signBtn">注册</button>
+            </li>
+        </ul>
+     
+    </div>
+    <script>
+        function ajax(){ 
+        var ajaxData = { 
+            type:arguments[0].type || "GET", 
+            url:arguments[0].url || "", 
+            async:arguments[0].async || "true", 
+            data:arguments[0].data || null, 
+            dataType:arguments[0].dataType || "json", 
+            returnType:arguments[0].returnType || "text", 
+            contentType:arguments[0].contentType || "json", 
+            beforeSend:arguments[0].beforeSend || function(){}, 
+            success:arguments[0].success || function(){}, 
+            error:arguments[0].error || function(){} 
+        } 
+        ajaxData.beforeSend() 
+        var xhr = createxmlHttpRequest();  
+        xhr.responseType=ajaxData.returnType; 
+        xhr.open(ajaxData.type,ajaxData.url,ajaxData.async);  
+        xhr.setRequestHeader("Content-Type",ajaxData.contentType);  
+        xhr.send(convertData(ajaxData.data,ajaxData.dataType));  
+        xhr.onreadystatechange = function() {  
+            if (xhr.readyState == 4) {  
+            if(xhr.status >=200&&xhr.status<= 300){ 
+                ajaxData.success(xhr.response) 
+            }else{ 
+                ajaxData.error() 
+            }  
+            } 
+        }  
+        } 
+
+        function createxmlHttpRequest() {  
+        if (window.ActiveXObject) {  
+            return new ActiveXObject("Microsoft.XMLHTTP");  
+        } else if (window.XMLHttpRequest) {  
+            return new XMLHttpRequest();  
+        }  
+        } 
+        
+        function convertData(data,datatype){ 
+        if( typeof data === 'object' ){ 
+            if(datatype=='json'){
+                convertResult=JSON.stringify(data);
+            }
+            else {
+                    var convertResult = "" ;  
+                    for(var c in data){  
+                    convertResult+= c + "=" + data[c] + "&";  
+                    }  
+                    convertResult=convertResult.substring(0,convertResult.length-1)
+            }                      
+            console.log(convertResult);
+            return convertResult; 
+        }else{ 
+            return data; 
+        } 
+        }
+        // ajax({ 
+        //     type:"POST", 
+        //     url:"http://119.91.210.79:3000/login", 
+        //     returnType:"json", 
+        //     contentType: 'application/json;charset=utf-8',
+        //     data:{
+        //         "username": "qgstudio",
+        //         "password": "qgstudio"
+        //     }, 
+        //     beforeSend:function(){ 
+                
+        //     }, 
+        //     success:function(res){ 
+        //         console.log(res) 
+        //     }, 
+        //     error:function(){ 
+        //         console.log("error") 
+        //     } 
+        // })
+        
+        var a =document.querySelectorAll('a');
+        var li = document.querySelectorAll('li');
+        var bg=document.querySelector('.bg1');
+        var box=document.querySelector('.box');
+        var input=document.querySelectorAll('input');
+        var rem=document.querySelector('.rem');
+        var eye=document.querySelector('.eye');
+        var flag=0;
+        eye.addEventListener('mouseover' ,function(){
+            eye.src='eye.gif';
+            eye.style.width='42px';
+            eye.style.left='272px';
+            eye.style.bottom='121px';          
+        })
+        eye.addEventListener('mouseout' ,function(){
+            eye.src='eye1.png';
+            eye.style.width='28px';
+            eye.style.left='279px';
+            eye.style.bottom='124px';          
+        })
+        eye.addEventListener('click' ,function(){
+            if(!flag){
+                input[1].type='text';
+                flag=1;
+            } 
+            else{
+                input[1].type='password';
+                flag=0;
+            }       
+        })
+        for(var i=0;i<a.length;i++){
+            a[i].addEventListener('click',function(){  
+                for(var j=0;j<li.length;j++){
+                    li[j].className='hide';
+                } 
+                if (this.id==0){    
+                    bg.src="1.webp";  
+                    for(var k=0;k<2;k++){
+                        input[k].className='';
+                        input[k].style.color='black';
+                    }
+                    for(var k=0;k<a.length;k++){
+                        a[k].style.color='black';
+                    }
+                    box.style.backgroundColor='rgba(255, 220, 223,.3)';      
+                    box.style.height="334px";
+                } 
+                if (this.id==1){               
+                    bg.src="2.webp";
+                    for(var k=3;k<input.length;k++){
+                        input[k].className='inputSign';
+                        input[k].style.color='white';
+                    }
+                    for(var k=0;k<a.length;k++){
+                        a[k].style.color='white';
+                    }
+                    box.style.backgroundColor='rgba(0,0,0,.5)';
+                    box.style.height='400px';
+                }         
+                 li[this.id].className="";
+                 
+            })
+        }
+        if(localStorage.getItem('mima')){
+            input[1].value=localStorage.getItem('mima');
+            rem.checked=true;
+        }
+        rem.addEventListener('change',function(){
+            if(this.checked){
+                localStorage.setItem('mima',input[1].value);
+            }
+            else {
+                localStorage.removeItem('mima');
+            }
+        })
+        // const xhr =new XMLHttpRequest();
+        // xhr.open('POST','http://119.91.210.79:3000/login');
+        // xhr.responseType='json';
+        // xhr.setRequestHeader('Content-Type','json');
+        // xhr.send(JSON.stringify({
+        //          "username": "qgstudio",
+        //          "password": "qgstudio"
+        //      }))
+        // xhr.onreadystatechange=function(){
+        //     if(xhr.readyState==4){
+        //         if(xhr.status>=200&&xhr.status<=300){
+        //             console.log(xhr.response);
+        //         }
+        //     }
+        // }
+        var loginBtn= document.querySelector('.loginBtn');
+        loginBtn.addEventListener('click',function(){
+            var ul=document.querySelector('ul');
+            var zhanghao=ul.children[0].children[0].children[0].value;
+            var mima=ul.children[0].children[0].children[1].value;
+            if(zhanghao==''||mima==''){               
+                return alert("存在未输入的内容");
+            }
+          
+            ajax({ 
+                type:"POST", 
+                url:"http://119.91.210.79:3000/login", 
+                returnType:"json", 
+                contentType: 'application/json;charset=utf-8',
+                data:{
+                    "username": zhanghao,
+                    "password": mima
+                }, 
+                beforeSend:function(){ 
+                    
+                }, 
+                success:function(res){ 
+                    console.log(res) ;
+                    if(res.status==1){
+                        alert("登陆成功!");
+                    }
+                    else{
+                        alert("登陆失败!");
+                    }
+                }, 
+                error:function(){ 
+                    console.log("error") ;
+                    alert("ERROR!");
+                } 
+        })
+
+        })
+    </script>
+</body>
+</html>
